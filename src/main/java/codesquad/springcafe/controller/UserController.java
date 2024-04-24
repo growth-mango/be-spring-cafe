@@ -84,4 +84,10 @@ public class UserController {
         redirectAttributes.addAttribute("id", updatedUser.getUserId());
         return "redirect:/users/{id}";
     }
+
+    // 로그인 화면
+    @GetMapping("/login")
+    public String showLoginForm(){
+        return "users/login";
+    }
 }
