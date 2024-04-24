@@ -10,4 +10,7 @@ public interface UserService {
     Optional<User> findUserByUserId(String userId); // null 이 있을 수도 있을 경우... null 안정성
     List<User> findAllUsers();
     User update(String userId, User user);
+
+    // 로그인
+    Optional<User> login(String userId, String password);
 }

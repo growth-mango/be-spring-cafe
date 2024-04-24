@@ -59,4 +59,10 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+    @Override
+    public Optional<User> login(String userId, String password) {
+        return userRepository.findByUserId(userId)
+                .filter(user -> user.getPassword().equals(password));
+    }
 }
