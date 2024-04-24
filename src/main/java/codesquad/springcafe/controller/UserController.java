@@ -2,6 +2,7 @@ package codesquad.springcafe.controller;
 
 import codesquad.springcafe.dto.User;
 import codesquad.springcafe.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +88,27 @@ public class UserController {
 
     // 로그인 화면
     @GetMapping("/login")
-    public String showLoginForm(){
+    public String showLoginForm() {
         return "users/login";
+    }
+
+    // 로그인 실패 화면
+    @GetMapping("/login/failed")
+    public String showLoginFailedForm() {
+        return "users/login_failed";
+    }
+
+    // 로그인 처리
+    @PostMapping("/login")
+    public String login(@RequestParam("userId") String userId, @RequestParam("password") String password, HttpSession session) {
+        Optional<User> user = userService.login(userId, password);
+
+        if (user.isPresent()) {
+            session.setAttribute("currentUser", user.get());
+            logger.info("login user={}", user);
+            return "redirect:/users";
+        } else {
+            return "redirect:/users/login/failed";
+        }
     }
 }
