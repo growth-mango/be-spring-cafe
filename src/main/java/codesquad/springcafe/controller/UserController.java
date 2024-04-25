@@ -111,4 +111,12 @@ public class UserController {
             return "redirect:/users/login/failed";
         }
     }
+
+    // 로그아웃 처리
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/users/login";
+    }
+
 }
