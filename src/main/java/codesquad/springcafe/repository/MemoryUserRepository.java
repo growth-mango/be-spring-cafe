@@ -33,4 +33,9 @@ public class MemoryUserRepository implements UserRepository{
     public List<User> findAll() {
         return new ArrayList<>(store.values());
     }
+
+    @Override
+    public void update(User user) {
+
+    }
 }

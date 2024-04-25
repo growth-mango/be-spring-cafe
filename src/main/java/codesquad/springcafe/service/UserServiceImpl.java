@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(updatedUser.getPassword());
 
         // 3. 저장하기
-        userRepository.save(user);
+        userRepository.update(user);
 
         return user;
     }
