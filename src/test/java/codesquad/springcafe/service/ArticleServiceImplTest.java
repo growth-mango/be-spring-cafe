@@ -1,8 +1,8 @@
 package codesquad.springcafe.service;
 
-import codesquad.springcafe.dto.Article;
-import codesquad.springcafe.repository.ArticleRepository;
-import codesquad.springcafe.repository.MemoryArticleRepository;
+import codesquad.springcafe.article.dto.Article;
+import codesquad.springcafe.article.repository.ArticleRepository;
+import codesquad.springcafe.article.service.ArticleServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

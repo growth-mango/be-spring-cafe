@@ -1,6 +1,6 @@
-package codesquad.springcafe.service;
+package codesquad.springcafe.user.service;
 
-import codesquad.springcafe.dto.User;
+import codesquad.springcafe.user.dto.User;
 
 import java.util.List;
 import java.util.Optional;

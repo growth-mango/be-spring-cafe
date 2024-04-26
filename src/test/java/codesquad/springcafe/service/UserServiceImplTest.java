@@ -1,7 +1,8 @@
 package codesquad.springcafe.service;
 
-import codesquad.springcafe.dto.User;
-import codesquad.springcafe.repository.UserRepository;
+import codesquad.springcafe.user.dto.User;
+import codesquad.springcafe.user.repository.UserRepository;
+import codesquad.springcafe.user.service.UserServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

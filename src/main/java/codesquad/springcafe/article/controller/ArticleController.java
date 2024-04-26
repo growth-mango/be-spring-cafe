@@ -1,8 +1,8 @@
 
-package codesquad.springcafe.controller;
+package codesquad.springcafe.article.controller;
 
-import codesquad.springcafe.dto.Article;
-import codesquad.springcafe.service.ArticleService;
+import codesquad.springcafe.article.dto.Article;
+import codesquad.springcafe.article.service.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
