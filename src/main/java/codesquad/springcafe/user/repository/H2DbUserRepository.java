@@ -7,10 +7,15 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import javax.print.attribute.standard.MediaSize;
 import java.util.*;
 
 @Repository
 public class H2DbUserRepository implements UserRepository {
+    private static final String USER_ID = "userId";
+    private static final String PASSWORD = "password";
+    private static final String NAME = "name";
+    private static final String EMAIL = "email";
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -25,10 +30,10 @@ public class H2DbUserRepository implements UserRepository {
                 .withTableName("users");
 
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("userId", user.getUserId());
-        parameters.put("password", user.getPassword());
-        parameters.put("name", user.getName());
-        parameters.put("email", user.getEmail());
+        parameters.put(USER_ID, user.getUserId());
+        parameters.put(PASSWORD, user.getPassword());
+        parameters.put(NAME, user.getName());
+        parameters.put(EMAIL, user.getEmail());
 
         jdbcInsert.execute(parameters);
 
@@ -50,10 +55,10 @@ public class H2DbUserRepository implements UserRepository {
     private RowMapper<User> userRowMapper() {
         return (rs, rowNum) -> {
             User user = new User(
-                    rs.getString("userId"),
-                    rs.getString("password"),
-                    rs.getString("name"),
-                    rs.getString("email")
+                    rs.getString(USER_ID),
+                    rs.getString(PASSWORD),
+                    rs.getString(NAME),
+                    rs.getString(EMAIL)
             );
             return user;
         };
