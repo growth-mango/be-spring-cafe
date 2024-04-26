@@ -14,11 +14,11 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository
-public class JdbcTemplateArticleRepository implements ArticleRepository{
+public class H2DbArticleRepository implements ArticleRepository{
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public JdbcTemplateArticleRepository(JdbcTemplate jdbcTemplate) {
+    public H2DbArticleRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

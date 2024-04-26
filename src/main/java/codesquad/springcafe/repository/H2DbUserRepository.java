@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 @Repository
-public class JdbcTemplateUserRepository implements UserRepository {
+public class H2DbUserRepository implements UserRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public JdbcTemplateUserRepository(JdbcTemplate jdbcTemplate) {
+    public H2DbUserRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
