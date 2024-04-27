@@ -1,6 +1,6 @@
 package codesquad.springcafe.service;
 
-import codesquad.springcafe.user.dto.User;
+import codesquad.springcafe.user.model.User;
 import codesquad.springcafe.user.repository.UserRepository;
 import codesquad.springcafe.user.service.UserServiceImpl;
 import org.junit.jupiter.api.DisplayName;

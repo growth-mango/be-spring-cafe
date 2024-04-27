@@ -1,4 +1,4 @@
-package codesquad.springcafe.article.dto;
+package codesquad.springcafe.article.model;
 
 import java.beans.ConstructorProperties;
 import java.sql.Timestamp;

@@ -1,6 +1,6 @@
 package codesquad.springcafe.user.repository;
 
-import codesquad.springcafe.user.dto.User;
+import codesquad.springcafe.user.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

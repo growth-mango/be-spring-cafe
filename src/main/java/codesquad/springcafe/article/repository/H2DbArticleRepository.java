@@ -1,6 +1,6 @@
 package codesquad.springcafe.article.repository;
 
-import codesquad.springcafe.article.dto.Article;
+import codesquad.springcafe.article.model.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

@@ -1,6 +1,6 @@
 package codesquad.springcafe.service;
 
-import codesquad.springcafe.article.dto.Article;
+import codesquad.springcafe.article.model.Article;
 import codesquad.springcafe.article.repository.ArticleRepository;
 import codesquad.springcafe.article.service.ArticleServiceImpl;
 import org.junit.jupiter.api.DisplayName;

@@ -1,6 +1,6 @@
 package codesquad.springcafe.user.repository;
 
-import codesquad.springcafe.user.dto.User;
+import codesquad.springcafe.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

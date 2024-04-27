@@ -1,6 +1,6 @@
 package codesquad.springcafe.article.service;
 
-import codesquad.springcafe.article.dto.Article;
+import codesquad.springcafe.article.model.Article;
 import codesquad.springcafe.article.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

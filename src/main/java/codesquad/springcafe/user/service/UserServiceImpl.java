@@ -1,7 +1,7 @@
 package codesquad.springcafe.user.service;
 
 import codesquad.springcafe.user.repository.UserRepository;
-import codesquad.springcafe.user.dto.User;
+import codesquad.springcafe.user.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

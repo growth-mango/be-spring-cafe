@@ -1,6 +1,6 @@
 package codesquad.springcafe.user.controller;
 
-import codesquad.springcafe.user.dto.User;
+import codesquad.springcafe.user.model.User;
 import codesquad.springcafe.user.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;

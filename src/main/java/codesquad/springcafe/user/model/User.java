@@ -1,4 +1,4 @@
-package codesquad.springcafe.user.dto;
+package codesquad.springcafe.user.model;
 
 import java.beans.ConstructorProperties;
 

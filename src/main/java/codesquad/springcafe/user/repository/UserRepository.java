@@ -1,7 +1,7 @@
 package codesquad.springcafe.user.repository;
 
 
-import codesquad.springcafe.user.dto.User;
+import codesquad.springcafe.user.model.User;
 
 import java.util.List;
 import java.util.Optional;

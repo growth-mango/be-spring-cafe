@@ -1,8 +1,9 @@
 
 package codesquad.springcafe.article.controller;
 
-import codesquad.springcafe.article.dto.Article;
+import codesquad.springcafe.article.model.Article;
 import codesquad.springcafe.article.service.ArticleService;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ArticleController {
 
     // 게시글 목록 조회
     @GetMapping("")
-    public String showAllArticles(Model model){
+    public String showAllArticles(Model model) {
         List<Article> articles = articleService.findAllArticles();
         model.addAttribute("articles", articles); // 뷰로 데이터 전달하기 위함
         return "qna/list";
@@ -35,7 +36,10 @@ public class ArticleController {
 
     // 게시글 작성 양식
     @GetMapping("/create")
-    public String showArticleForm() {
+    public String showArticleForm(HttpSession session) {
+        if (session.getAttribute("currentUser") == null) {
+            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+        }
         return "qna/form";
     }
 
@@ -43,7 +47,7 @@ public class ArticleController {
     // qna/create 경로로 POST 요청을 받으면 호출
     // 입력받은 Article 객체를 저장하고
     // 저장된 게시글의 ID를 RedirectAttributes 에 추가해 상세 페이지로 리다이렉트
-        // RedirectAttribute : 저장된 아티클의 아이디를 리다이렉트 주소로 넘겨!
+    // RedirectAttribute : 저장된 아티클의 아이디를 리다이렉트 주소로 넘겨!
     @PostMapping("/create") // @ModelAttribute : 폼 => 객체 바인딩
     public String createArticle(@ModelAttribute Article article, RedirectAttributes redirectAttributes) {
         Article savedArticle = articleService.createArticle(article);
@@ -58,11 +62,11 @@ public class ArticleController {
     // qna/{id} 경로로 GET 요청을 받으면 호출
     // 해당 ID의 게시글이 존재하지 않을 경우 로그 기록 게시글 목록으로 리다이렉트
     // 존재하면 해당 게시글을 모델에 추가하고 qna/show 뷰 반환
-     @GetMapping("{id}")
-    public String showArticleDetail(@PathVariable("id") Long id, Model model){
+    @GetMapping("{id}")
+    public String showArticleDetail(@PathVariable("id") Long id, Model model) {
         Optional<Article> articleOptional = articleService.findArticleById(id);
 
-        if(!articleOptional.isPresent()){
+        if (!articleOptional.isPresent()) {
             logger.error("Article with id {} not found", id);
             return "redirect:/qna/list";
         }
