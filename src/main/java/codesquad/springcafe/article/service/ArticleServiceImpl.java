@@ -48,7 +48,8 @@ public class ArticleServiceImpl implements ArticleService {
         // 업데이트한 내용 저장하기
         article.setTitle(updateArticle.getTitle());
         article.setContent(updateArticle.getContent());
-        return articleRepository.save(article);
+        articleRepository.update(article);
+        return article;
     }
 
 

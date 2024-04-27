@@ -3,6 +3,7 @@ package codesquad.springcafe.article.controller;
 
 import codesquad.springcafe.article.model.Article;
 import codesquad.springcafe.article.service.ArticleService;
+import codesquad.springcafe.user.model.User;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,10 +37,14 @@ public class ArticleController {
 
     // 게시글 작성 양식
     @GetMapping("/create")
-    public String showArticleForm(HttpSession session) {
-        if (session.getAttribute("currentUser") == null) {
+    public String showArticleForm(HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("currentUser");
+
+        if (currentUser == null) {
             return "redirect:/users/login"; // 로그인 페이지로 리다이렉트
         }
+
+        model.addAttribute("user", currentUser);
         return "qna/form";
     }
 
@@ -82,5 +87,47 @@ public class ArticleController {
         logger.debug("article = {}", article);
         model.addAttribute("article", article);
         return "qna/show";
+    }
+
+    // 게시글 수정 화면
+    @GetMapping("{id}/edit")
+    public String showEditForm(@PathVariable("id") Long id, Model model, HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser == null) {
+            return "redirect:/users/login";
+        }
+
+        Article article = articleService.findArticleById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid article Id"));
+
+        if (!article.getWriter().equals(currentUser.getUserId())) {
+            return "redirect:/qna";
+        }
+
+        model.addAttribute("article", article);
+        return "qna/form_update";
+    }
+
+    @PutMapping("{id}/edit")
+    public String updateArticle(@PathVariable("id") Long id, @ModelAttribute Article article, RedirectAttributes redirectAttributes, HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser == null) {
+            return "redirect:/users/login";
+        }
+
+        // 서비스 메서드 호출 전에 사용자 권한 확인
+        try {
+            Article updatedArticle = articleService.update(id, currentUser, article);
+            redirectAttributes.addAttribute("id", updatedArticle.getId());
+            return "redirect:/qna/{id}";
+        } catch (IllegalStateException e) {
+            // 권한이 없는 경우의 처리
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/qna";
+        } catch (IllegalArgumentException e) {
+            // 게시글이 존재하지 않을 때의 처리
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/qna";
+        }
     }
 }
