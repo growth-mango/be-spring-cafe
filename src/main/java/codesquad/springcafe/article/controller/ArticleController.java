@@ -38,7 +38,7 @@ public class ArticleController {
     @GetMapping("/create")
     public String showArticleForm(HttpSession session) {
         if (session.getAttribute("currentUser") == null) {
-            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+            return "redirect:/users/login"; // 로그인 페이지로 리다이렉트
         }
         return "qna/form";
     }
@@ -51,7 +51,7 @@ public class ArticleController {
     @PostMapping("/create") // @ModelAttribute : 폼 => 객체 바인딩
     public String createArticle(@ModelAttribute Article article, RedirectAttributes redirectAttributes, HttpSession session) {
         if (session.getAttribute("currentUser") == null) {
-            return "redirect:/login";
+            return "redirect:/users/login";
         }
         Article savedArticle = articleService.createArticle(article);
         logger.info("article info = {}", article);
@@ -68,7 +68,7 @@ public class ArticleController {
     @GetMapping("{id}")
     public String showArticleDetail(@PathVariable("id") Long id, Model model, HttpSession session) {
         if (session.getAttribute("currentUser") == null) {
-            return "redirect:/login";
+            return "redirect:/users/login";
         }
 
         Optional<Article> articleOptional = articleService.findArticleById(id);
