@@ -49,7 +49,10 @@ public class ArticleController {
     // 저장된 게시글의 ID를 RedirectAttributes 에 추가해 상세 페이지로 리다이렉트
     // RedirectAttribute : 저장된 아티클의 아이디를 리다이렉트 주소로 넘겨!
     @PostMapping("/create") // @ModelAttribute : 폼 => 객체 바인딩
-    public String createArticle(@ModelAttribute Article article, RedirectAttributes redirectAttributes) {
+    public String createArticle(@ModelAttribute Article article, RedirectAttributes redirectAttributes, HttpSession session) {
+        if (session.getAttribute("currentUser") == null) {
+            return "redirect:/login";
+        }
         Article savedArticle = articleService.createArticle(article);
         logger.info("article info = {}", article);
         redirectAttributes.addAttribute("id", savedArticle.getId());
@@ -63,7 +66,11 @@ public class ArticleController {
     // 해당 ID의 게시글이 존재하지 않을 경우 로그 기록 게시글 목록으로 리다이렉트
     // 존재하면 해당 게시글을 모델에 추가하고 qna/show 뷰 반환
     @GetMapping("{id}")
-    public String showArticleDetail(@PathVariable("id") Long id, Model model) {
+    public String showArticleDetail(@PathVariable("id") Long id, Model model, HttpSession session) {
+        if (session.getAttribute("currentUser") == null) {
+            return "redirect:/login";
+        }
+
         Optional<Article> articleOptional = articleService.findArticleById(id);
 
         if (!articleOptional.isPresent()) {
