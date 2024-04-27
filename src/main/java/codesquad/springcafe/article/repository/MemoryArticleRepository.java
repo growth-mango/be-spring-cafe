@@ -29,4 +29,9 @@ public class MemoryArticleRepository implements ArticleRepository{
     public List<Article> findAll() {
         return store.values().stream().toList();
     }
+
+    @Override
+    public void update(Article article) {
+
+    }
 }

@@ -50,6 +50,15 @@ public class H2DbArticleRepository implements ArticleRepository{
         return jdbcTemplate.query("select * from ARTICLES", articleRowMapper());
     }
 
+    @Override
+    public void update(Article article) {
+        String sql = "UPDATE articles SET title = ?, content = ? WHERE id =?";
+        jdbcTemplate.update(sql,
+                article.getTitle(),
+                article.getContent(),
+                article.getId());
+    }
+
     private RowMapper<Article> articleRowMapper(){
         return (rs, rowNum) -> {
             Article article = new Article(

@@ -70,7 +70,8 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse2">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="/qna/create">Posts</a></li>
+                <li class="active"><a href="/qna">질문목록보기</a></li>
+                <li><a href="/qna/create">질문하기</a></li>
                 {{#currentUser}}
                     <li><a href="/users/logout" role="button">로그아웃</a></li>
                     <li><a href="/users/{{currentUser.userId}}/edit" role="button">개인정보수정</a></li>

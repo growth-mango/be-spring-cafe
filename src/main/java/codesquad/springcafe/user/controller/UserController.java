@@ -83,7 +83,7 @@ public class UserController {
         User updatedUser = userService.update(id, user);
         logger.info("updated user={}", updatedUser);
         redirectAttributes.addAttribute("id", updatedUser.getUserId());
-        return "redirect:/users/{id}";
+        return "redirect:/users";
     }
 
     // 로그인 화면
@@ -106,7 +106,7 @@ public class UserController {
         if (user.isPresent()) {
             session.setAttribute("currentUser", user.get());
             logger.info("login user={}", user);
-            return "redirect:/users";
+            return "redirect:/qna";
         } else {
             return "redirect:/users/login/failed";
         }
